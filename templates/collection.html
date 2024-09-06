@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% block title %}Collection{% endblock %}
+{% block content %}
+{{ super() }}
+
+<div id="content">
+    <h1> Collection of {{current_user.first_name}}</h1>
+    <form method="POST">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Released</th>
+                <th>Metacritic</th>
+                {% if current_user.is_authenticated %}
+                    <th>Remove</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for collections in collections %}
+                <tr>
+                    <td>{{collections.title}}</td>
+                    <td>{{collections.genre}}</td>
+                    <td>{{collections.release_date}}</td>
+                    <td>{{collections.MetacriticRating}}</td>
+                    <td>
+                        {% if current_user.is_authenticated %}
+                            {% if game_in_collection(collections.game_id, current_user.user_id) %}
+                                <button type="submit" name="remove" value="{{collections.game_id}}">-</button>
+                            {% else %}
+                                <button type ="submit" name="add" value="{{collections.game_id}}">+</button>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </form>
+</div>
+{% endblock %}
+
+

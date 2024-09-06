@@ -1,0 +1,11 @@
+Flask~=3.0.0
+Flask-Restful
+Flask-SQLAlchemy
+SQLAlchemy
+requests
+mysql-connector-python
+mysql-connector-python-rf
+pymysql
+cryptography
+flask-login
+
